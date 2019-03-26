@@ -1,0 +1,20 @@
+<html>
+<head>
+<base target="_top">
+</head>
+<body style="font-family: Helvetica">
+<form name="myForm">
+<font style="font-size: 12pt; font-family: Helvetica;">Specificare i prodotti da invocare</font><br><br><br>
+<input type="checkbox" name="entity_profile_enabled" value="on"> Profilo<br><br>
+<input type="checkbox" name="score_enabled" value="on"> Score CGS<br><br>
+<input type="checkbox" name="real_estate_score_enabled" value="on"> Real Estate Score
+<br><br>
+    <input type="button" value="Submit"
+    onclick="google.script.run
+        .withSuccessHandler(google.script.host.close)
+        .formSubmit(this.parentNode)" />
+   <input type="button" value="Close"  onclick="google.script.host.close()" />
+</form>
+</body>
+</html>
+
