@@ -15,6 +15,7 @@ function apikey_modal() {
     var docProp = PropertiesService.getDocumentProperties()
     docProp.setProperty("APIKEY", text)
     update_ui();
+    onOpen();
   } else if (button == ui.Button.CANCEL) {
   } else if (button == ui.Button.CLOSE) {
   }
