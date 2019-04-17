@@ -3,14 +3,16 @@ function onOpen() {
   var ui = SpreadsheetApp.getUi();
   var mainMenu = ui.createMenu("Cerved API");
   
-  mainMenu.addItem("Cerca Selezionata", "entity_search_from_cell");
-  mainMenu.addItem("Profilo Selezionata", "entity_profile_from_cell");
-  mainMenu.addItem("Score CGS Selezionata", "score_cgs_from_cell");
-  mainMenu.addItem("Real Estate Score Selezionata", "real_estate_score_from_cell");
-  mainMenu.addSeparator();
-  mainMenu.addItem("Arricchimento dati", "showSidebar");
-  mainMenu.addSeparator();
-  mainMenu.addItem("Azzera arricchimento", "clear_data");
+  if(property('APIKEY')) {
+    mainMenu.addItem("Cerca Selezionata", "entity_search_from_cell");
+    mainMenu.addItem("Profilo Selezionata", "entity_profile_from_cell");
+    mainMenu.addItem("Score CGS Selezionata", "score_cgs_from_cell");
+    mainMenu.addItem("Real Estate Score Selezionata", "real_estate_score_from_cell");
+    mainMenu.addSeparator();
+    mainMenu.addItem("Arricchimento dati", "showSidebar");
+    mainMenu.addSeparator();
+    mainMenu.addItem("Azzera arricchimento", "clear_data");
+  }
   mainMenu.addItem("Impostazioni", "apikey_modal");
   mainMenu.addToUi();
   
