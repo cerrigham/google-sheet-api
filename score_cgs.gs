@@ -22,7 +22,7 @@ function score_cgs(piva,idsoggetto,row) {
   var response = callScoreCGS(idsoggetto);
   var json = JSON.parse(response);
   
-  var score = json.score != undefined ? json.scores[0] : undefined;
+  var score = json.scores != undefined ? json.scores[0] : undefined;
   
   if(piva != undefined) {
     sheet.getRange("A"+position).setValue(piva);
