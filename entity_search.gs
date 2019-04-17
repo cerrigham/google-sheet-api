@@ -54,11 +54,34 @@ function entity_search_from_column() {
       }
       row = row+1;
     }
+    
+    // pulizia righe vuote
+    deleteEmptyRows("CervedProfile");
+    deleteEmptyRows("CervedScore");
+    deleteEmptyRows("REScore");
+    
     // gestione modal alla fine dell'esecuzione delle chiamate
     var output = HtmlService.createHtmlOutput('<script>google.script.host.close();</script>');
     
     ui.alert('Arricchimento completato');
   }
+}
+
+// pulizia righe vuote
+// @see https://yagisanatode.com/2017/12/13/google-apps-script-iterating-through-ranges-in-sheets-the-right-and-wrong-way/
+function deleteEmptyRows(sheetName) {
+   var s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
+    Logger.log("Pulizia di ");
+    Logger.log(sheetName);
+    var rangeData = s.getDataRange();
+    var lastColumn = rangeData.getLastColumn();
+    var lastRow = rangeData.getLastRow();
+    for(var z = start_search; z < lastRow; z++) {
+      //Logger.log(rangeData.getCell(z, 2).getValue());
+      if(!rangeData.getCell(z, 2).getValue()) {
+        s.deleteRow(z)
+      }
+    }
 }
 
 function flatten(sheet, row, response) {
@@ -117,4 +140,3 @@ function flatten(sheet, row, response) {
 function checkUndefined(p) {
   return p != undefined ? p : "n.a.";
 }
-
