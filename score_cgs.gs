@@ -22,17 +22,26 @@ function score_cgs(piva,idsoggetto,row) {
   var response = callScoreCGS(idsoggetto);
   var json = JSON.parse(response);
   
-  sheet.getRange("A"+position).setValue(piva);
+  var score = json.score != undefined ? json.scores[0] : undefined;
+  
+  if(piva != undefined) {
+    sheet.getRange("A"+position).setValue(piva);
+  }  else {
+    sheet.getRange("A"+position).setValue("");
+  }
+  //sheet.getRange("A"+position).setValue(piva);
   sheet.getRange("B"+position).setValue(idsoggetto);
   sheet.getRange("C"+position).setValue(checkUndefined(json.denominazione));
-  sheet.getRange("D"+position).setValue(checkUndefined(json.descrizione_score));
-  sheet.getRange("E"+position).setValue(checkUndefined(json.codice_score));
-  sheet.getRange("F"+position).setValue(checkUndefined(json.valore));
-  sheet.getRange("G"+position).setValue(checkUndefined(json.categoria_codice));
-  sheet.getRange("H"+position).setValue(checkUndefined(json.categoria_descrizione));
-  sheet.getRange("I"+position).setValue(checkUndefined(json.pd));
-  sheet.getRange("J"+position).setValue(checkUndefined(json.trend_codice));
-  sheet.getRange("K"+position).setValue(checkUndefined(json.trend_descrizione));
+  if(score != undefined) {
+  	sheet.getRange("D"+position).setValue(checkUndefined(score.descrizione_score));
+  	sheet.getRange("E"+position).setValue(checkUndefined(score.codice_score));
+  	sheet.getRange("F"+position).setValue(checkUndefined(score.valore));
+  	sheet.getRange("G"+position).setValue(checkUndefined(score.categoria_codice));
+  	sheet.getRange("H"+position).setValue(checkUndefined(score.categoria_descrizione));
+  	sheet.getRange("I"+position).setValue(checkUndefined(score.pd));
+  	sheet.getRange("J"+position).setValue(checkUndefined(score.trend_codice));
+  	sheet.getRange("K"+position).setValue(checkUndefined(score.trend_descrizione));
+  }
 }
 
 function checkUndefined(p) {
